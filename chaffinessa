@@ -10,93 +10,13 @@ NabChL = ['Н', 'На', 'Наб', 'Набе', 'Набер', 'Набере', 'Н�
 'набережные челны', 'челны', 'Челны', 'чел', 'чалы', 'член', 'нч']
 spisok1 = AbakanL + KrskL + NabChL
 #
+clock = datetime.datetime.now()
 
 def get_weather(city):
-    if get_weather(AbakanL):
-        s = requests.get("https://sinoptik.com.ru/погода-абакан")
-        b = bs4.BeautifulSoup(s.text, "html.parser")
-        # Утро
-        Utr1 = b.select(" .temperature .p3")
-        utro1 = Utr1[0].getText()
-        Utr2 = b.select(" .temperature .p4")
-        utro2 = Utr2[0].getText()
-        # День
-        De1 = b.select(" .temperature .p5")
-        den1 = De1[0].getText()
-        De2 = b.select(" .temperature .p6")
-        den2 = De2[0].getText()
-        # Вечер
-        Ve1 = b.select(" .temperature .p7")
-        ve1 = Ve1[0].getText()
-        Ve2 = b.select(" .temperature .p8")
-        ve2 = Ve2[0].getText()
-        # Ночь
-        Noch1 = b.select(" .temperature .p1")
-        noch1 = Noch1[0].getText()
-        Noch2 = b.select(" .temperature .p2")
-        noch2 = Noch2[0].getText()
-        # Общий
-        Ob1 = b.select(" .rSide .description")
-        ob1 = Ob1[0].getText()
-        print(space37, 'Запускаем дрон в небо')
-        print(space34, 'Фиксируем полученные данные')
-        print(space29, 'Разведка установила следующие показатели')
-        print('-')
-        print('Текущие время:', clock.strftime("%H:%M"))
-        print('Текущая дата: ', clock.strftime("%d.%m.%Y"))
-        print('-')
-        print('Утром: ' + utro1 + ' ' + utro2)
-        print('Днём: ' + den1 + ' ' + den2)
-        print('-')
-        time.sleep(1)
-        print('Вечером: ' + ve1 + ' ' + ve2)
-        time.sleep(1)
-        print('Ночью: ' + noch1 + ' ' + noch2)
-        print('-')
-        print(ob1.strip())
-        return get_weather()
-    if get_weather() == NabChL:
-        s = requests.get("https://sinoptik.com.ru/weather-naberezhnye-chelny")
-        b = bs4.BeautifulSoup(s.text, "html.parser")
-        # Утро
-        Utr1 = b.select(" .temperature .p3")
-        utro1 = Utr1[0].getText()
-        Utr2 = b.select(" .temperature .p4")
-        utro2 = Utr2[0].getText()
-        # День
-        De1 = b.select(" .temperature .p5")
-        den1 = De1[0].getText()
-        De2 = b.select(" .temperature .p6")
-        den2 = De2[0].getText()
-        # Вечер
-        Ve1 = b.select(" .temperature .p7")
-        ve1 = Ve1[0].getText()
-        Ve2 = b.select(" .temperature .p8")
-        ve2 = Ve2[0].getText()
-        # Ночь
-        Noch1 = b.select(" .temperature .p1")
-        noch1 = Noch1[0].getText()
-        Noch2 = b.select(" .temperature .p2")
-        noch2 = Noch2[0].getText()
-        # Общий
-        Ob1 = b.select(" .rSide .description")
-        ob1 = Ob1[0].getText()
-        print('Запускаем спутник в небо')
-        print('Фиксируем полученные данные')
-        print('Разведка установила следующие показатели')
-        print('-')
-        print('Текущие время:', clock.strftime('%H:%M'))
-        print('Текущая дата: ', clock.strftime('%d.%m.%Y'))
-        print('-')
-        print('Утром: ' + utro1 + ' ' + utro2)
-        print('Днём: ' + den1 + ' ' + den2)
-        print('-')
-        print('Вечером: ' + ve1 + ' ' + ve2)
-        print('Ночью: ' + noch1 + ' ' + noch2)
-        print('-')
-        print(ob1.strip())
-        return get_weather()
-    if get_weather() == KrskL:
+   
+
+    if city in KrskL:
+
         s = requests.get("https://sinoptik.com.ru/погода-красноярск")
         b = bs4.BeautifulSoup(s.text, "html.parser")
         # Утро
@@ -122,27 +42,16 @@ def get_weather(city):
         # Общий
         Ob1 = b.select(" .rSide .description")
         ob1 = Ob1[0].getText()
-        print('Смотрим в небо')
-        print('Анализируем звезды')
-        print('Шаманы установили следующие показатели')
-        print('-')
-        print('Текущие время:', clock.strftime('%H:%M'))
-        print('Текущая дата: ', clock.strftime('%d.%m.%Y'))
-        print('-')
-        print('Утром: ' + utro1 + ' ' + utro2)
-        print('Днём: ' + den1 + ' ' + den2)
-        print('-')
-        print('Вечером: ' + ve1 + ' ' + ve2)
-        print('Ночью: ' + noch1 + ' ' + noch2)
-        print('-')
-        print(ob1.strip())
-        return get_weather()
+        xxx = ('Смотрим в небо\nАнализируем звезды\nШаманы установили следующие показатели\n-'
+               '\nТекущие время:', clock.strftime('%H:%M'))
+        zzz = (
+        'Текущая дата: ', clock.strftime('%d.%m.%Y'), '\nУтром: ' + utro1 + utro2, '\nДнём: ' + den1 + den2, '\n-',
+        '\nВечером: ' + ve1 + ve2, '\nНочью: ' + noch1 + noch2, '\n-', + ob1.strip())
 
-
-
-
-
-
-
-
-
+        xxx + zzz
+        xxx += 'xz'
+        print('xz')
+      
+        '''
+city = input()
+print(get_weather(city))
