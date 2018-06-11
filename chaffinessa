@@ -15,42 +15,38 @@ clock = datetime.datetime.now()
 def get_weather(city):
    
 
-    if city in KrskL:
-
+     if city in KrskL:
         s = requests.get("https://sinoptik.com.ru/погода-красноярск")
         b = bs4.BeautifulSoup(s.text, "html.parser")
-        # Утро
-        Utr1 = b.select(" .temperature .p3")
-        utro1 = Utr1[0].getText()
-        Utr2 = b.select(" .temperature .p4")
-        utro2 = Utr2[0].getText()
-        # День
-        De1 = b.select(" .temperature .p5")
-        den1 = De1[0].getText()
-        De2 = b.select(" .temperature .p6")
-        den2 = De2[0].getText()
-        # Вечер
-        Ve1 = b.select(" .temperature .p7")
-        ve1 = Ve1[0].getText()
-        Ve2 = b.select(" .temperature .p8")
-        ve2 = Ve2[0].getText()
-        # Ночь
-        Noch1 = b.select(" .temperature .p1")
-        noch1 = Noch1[0].getText()
-        Noch2 = b.select(" .temperature .p2")
-        noch2 = Noch2[0].getText()
-        # Общий
-        Ob1 = b.select(" .rSide .description")
-        ob1 = Ob1[0].getText()
+            # Утро
+        a = b.select(" .temperature .p3")[0].getText()
+        a += b.select(" .temperature .p4")[0].getText()
+            # День
+        a += '\n'
+        a += b.select(" .temperature .p5")[0].getText()
+        a += b.select(" .temperature .p6")[0].getText()
+            # Вечер
+        a += '\n'
+        a += b.select(' .temperature .p7')[0].getText()
+        a += b.select(' .temperature .p8')[0].getText()
+            # Ночь
+        a += '\n'
+        a += b.select(" .temperature .p1")[0].getText()
+        a += b.select(" .temperature .p2")[0].getText()
+            # Общий
+        a += '\n'
+        a += b.select(" .rSide .description")[0].getText()
+            #
         xxx = ('Смотрим в небо\nАнализируем звезды\nШаманы установили следующие показатели\n-'
-               '\nТекущие время:', clock.strftime('%H:%M'))
+                   '\nТекущие время:', clock.strftime('%H:%M'))
         zzz = (
-        'Текущая дата: ', clock.strftime('%d.%m.%Y'), '\nУтром: ' + utro1 + utro2, '\nДнём: ' + den1 + den2, '\n-',
-        '\nВечером: ' + ve1 + ve2, '\nНочью: ' + noch1 + noch2, '\n-', + ob1.strip())
+            'Текущая дата: ', clock.strftime('%d.%m.%Y'), '\nУтром: ' + a + a, '\nДнём: ' + a + a, '\n-',
+            '\nВечером: ' + a + a, '\nНочью: ' + a + a + a, " ")
 
         xxx + zzz
         xxx += 'xz'
         print('xz')
+      
       
         '''
 city = input()
