@@ -15,39 +15,38 @@ clock = datetime.datetime.now()
 def get_weather(city):
    
 
-     if city in KrskL:
+    if city in KrskL:
         s = requests.get("https://sinoptik.com.ru/погода-красноярск")
         b = bs4.BeautifulSoup(s.text, "html.parser")
             # Утро
-        a = b.select(" .temperature .p3")[0].getText()
-        a += b.select(" .temperature .p4")[0].getText()
+        U = b.select(" .temperature .p3")[0].getText()
+        U += b.select(" .temperature .p4")[0].getText()
             # День
-        a += '\n'
-        a += b.select(" .temperature .p5")[0].getText()
-        a += b.select(" .temperature .p6")[0].getText()
+
+        D = b.select(" .temperature .p5")[0].getText()
+        D += b.select(" .temperature .p6")[0].getText()
             # Вечер
-        a += '\n'
-        a += b.select(' .temperature .p7')[0].getText()
-        a += b.select(' .temperature .p8')[0].getText()
+
+        V = b.select(' .temperature .p7')[0].getText()
+        V += b.select(' .temperature .p8')[0].getText()
             # Ночь
-        a += '\n'
-        a += b.select(" .temperature .p1")[0].getText()
-        a += b.select(" .temperature .p2")[0].getText()
+
+        N = b.select(" .temperature .p1")[0].getText()
+        N += b.select(" .temperature .p2")[0].getText()
             # Общий
-        a += '\n'
-        a += b.select(" .rSide .description")[0].getText()
+
+        O = b.select(" .rSide .description")[0].getText()
             #
         xxx = ('Смотрим в небо\nАнализируем звезды\nШаманы установили следующие показатели\n-'
-                   '\nТекущие время:', clock.strftime('%H:%M'))
+                   '\nТекущие время:' + clock.strftime('%H:%M'))
         zzz = (
-            'Текущая дата: ', clock.strftime('%d.%m.%Y'), '\nУтром: ' + a + a, '\nДнём: ' + a + a, '\n-',
-            '\nВечером: ' + a + a, '\nНочью: ' + a + a + a, " ")
+            '\nТекущая дата: ' + clock.strftime('%d.%m.%Y')+ '\n-' + '\nУтром: ' + U +  '\nДнём: ' + D + '\n-' +
+            '\nВечером: ' + V +  '\nНочью: ' + N + '\n'+ O)
 
         xxx + zzz
-        xxx += 'xz'
-        print('xz')
+        xxx = xxx + zzz
+        print(xxx)
       
       
-        '''
 city = input()
 print(get_weather(city))
