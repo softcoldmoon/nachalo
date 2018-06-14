@@ -46,9 +46,6 @@ def get_weather(city):
 
         xxx + zzz
         xxx = xxx + zzz
-        return (xxx)
+        app.send_message(message['chat']['id'], xxx)
 
-
-city = input()
-app.send_message(message['chat']['id'], xxx)
 bot.polling(none_stop=True)
