@@ -1,4 +1,5 @@
-import bs4, requests, datetime, time, telebot
+import bs4, requests, datetime, time
+from telebot import TeleBot
 
 # Списки
 AbakanL = ['Абакан', 'абакан', 'Абакасик','а', 'аб', 'аба', 'абак', 'абака', 'абк', 'абдуль', 'хуй',
@@ -12,10 +13,11 @@ spisok1 = AbakanL + KrskL + NabChL
 #
 clock = datetime.datetime.now()
 #
+app = TeleBot(__name__)
 TOKEN = "553633377:AAEGKsPtdewL56-45neHf3RbiQ7tYorhFXQ"
-bot = telebot.TeleBot(TOKEN)
-@app.route
-def get_weather(city):
+bot = TeleBot(TOKEN)
+@app.route ('/weather ?(.*)')
+def get_weather(message, city):
     if city in KrskL:
         s = requests.get("https://sinoptik.com.ru/погода-красноярск")
         b = bs4.BeautifulSoup(s.text, "html.parser")
@@ -47,5 +49,7 @@ def get_weather(city):
         xxx + zzz
         xxx = xxx + zzz
         app.send_message(message['chat']['id'], xxx)
+    else:
+        app.send_message(message['chat']['id'], 'no such city')
 
 bot.polling(none_stop=True)
